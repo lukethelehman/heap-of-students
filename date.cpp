@@ -33,7 +33,7 @@ void Date::init(std::string dateString){
 }
 
 void Date::printDate(){
-    std::string months[] = {"Null","January", "Februrary","March", 
+    std::string months[] = {"Null","January", "February","March", 
                                   "April","May","June","July","August","September",
                                   "October","November","December"};
     std::cout << months[Date::month] << " ";
