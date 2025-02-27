@@ -77,15 +77,27 @@ int main()
 
 
 void loadStudents(students)
- infile stream inFile
- open "students.csv" with inFile
+ create ifstream inFile
+ create string studentString
 
+ open "students.csv" with inFile
  while inFile is not at the end of the file
+  getline from inFile, store to studentString
+  create new Student student
+  initialize student with studentString
+  append student to the students vector 
+  close the file 
   
   
- 
 printStudents(students vector)
+ for each student in students
+  student.printStudent()
+  print "______" to separate data
+
 showStudentNames(students vector)
+ for each student in students
+ student.getLastFirst()
+
 findStudent(students vector)
 delStudents(students vector)
 menu()
