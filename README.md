@@ -96,11 +96,36 @@ printStudents(students vector)
 
 showStudentNames(students vector)
  for each student in students
- student.getLastFirst()
+  student.getLastFirst()
 
 findStudent(students vector)
+ print "Last name of student: "
+ get input and store in search
+
+ for each student in students
+  create string stream ss equal to student.getLastFirst()
+  getline from ss, store to lastName, " " delimeter
+
+  if lastName.find(search) isn't equal to std::string::npos
+   print student's data
+
 delStudents(students vector)
+ for each studennt in students
+ delete student
+
 menu()
+ print "
+ 0) quit
+ 1) print all student data
+ 2) print all student names
+ 3) find a student
+
+ please choose 0-3: "
+ store user input into choice
+ return choice 
+
+
+ 
 
 
 
