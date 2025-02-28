@@ -16,11 +16,29 @@ std::string menu();
 
 
 int main(){
-  std::vector<Student*> students;
-  loadStudents(students);
-  //printStudents(students);
-  showStudentNames(students);
-  delStudent(students);
+    std::vector<Student*> students;
+    loadStudents(students);
+    bool keepGoing = true;
+
+    while (keepGoing){
+        std::string choice = menu();        
+        if (choice == "0"){
+            keepGoing = false;
+        }
+        else if (choice == "1"){
+            printStudents(students);
+        }
+        else if (choice == "2"){
+            showStudentNames(students);
+        }
+        else if (choice == "3") {
+            findStudent(students);
+        }
+        else{
+            std::cout << "Please choose an integer 0-3" << std::endl;
+        }
+    } 
+    delStudent(students);
 } 
 
 void loadStudents(std::vector<Student*>& students){
@@ -59,5 +77,32 @@ void delStudent(std::vector<Student*>& students){
 }
 
 void findStudent(std::vector<Student*>& students){
+    std::string search;
+    std::cout << "Last name of student: ";
+    std::cin >> search;
+
+    for (int i = 0; i < (students.size() - 1); i++) {
+        std::stringstream ss;
+        ss << students[i]->getLastFirst();
+        std::string lastName;
+        getline(ss, lastName, ' ');
+        if (lastName.find(search) != std::string::npos){
+            students[i]->printStudent();
+            std::cout << std::endl << "____________________________" << std::endl;
+        }
+    }
+}
+
+std::string menu(){
+    std::string choice;
+
+    std::cout << "0) Quit " << std::endl << "1) Print all student data" << std::endl;
+    std::cout << "2) Print all student names" << std::endl << "3) Find a student" << std::endl;
+    std::cout << std::endl << "Please choose 0-3: ";
+    std::cin >> choice;
+    return choice;
+}
+    
+
     
 
