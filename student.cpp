@@ -63,5 +63,10 @@ void Student::printStudent(){
     std::cout << "Grad: ";
     expectedGrad->printDate();
     std::cout << "Credits: " << creditHours;
+}
+
+std::string Student::getLastFirst(){
+    std::string lastFirst = lastName + " " + firstName;
+    return lastFirst;
 
 }    

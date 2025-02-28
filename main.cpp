@@ -1,39 +1,63 @@
 #include <iostream>
+#include <sstream>
+#include <fstream>
+#include <vector>
+#include <string>
 #include "date.h"
 #include "address.h"
 #include "student.h"
 
-void testAddress();
-void testDate();
-void testStudent();
+void loadStudents(std::vector<Student*>& students);
+void printStudents(std::vector<Student*>& students);
+void showStudentNames(std::vector<Student*>& students);
+void findStudent(std::vector<Student*>& students);
+void delStudent(std::vector<Student*>& students);
+std::string menu();
+
 
 int main(){
-  std::cout << "Hello!" << std::endl;
-  testAddress();
-  testDate();
-  testStudent();
-  return 0;
-} // end main
+  std::vector<Student*> students;
+  loadStudents(students);
+  //printStudents(students);
+  showStudentNames(students);
+  delStudent(students);
+} 
 
-void testAddress(){
-  Address a;
-  a.init("123 W Main St", "Muncie", "IN", "47303");
-  a.printAddress();
-} // end testAddress
+void loadStudents(std::vector<Student*>& students){
+    std::ifstream inFile;
+    std::string studentString;
 
-void testDate(){
- Date d;
- d.init("01/27/1997");
- d.printDate();
-} // end testDate
+    inFile.open("students.csv");
+    while (!inFile.eof()){
+        getline(inFile, studentString);
+        Student* student = new Student;
+        student->init(studentString);
+        students.push_back(student);
+    }
+    inFile.close();
+}
 
-void testStudent(){
-  std::string studentString = "Danielle,Johnson,32181 Johnson Course Apt. 389,New Jamesside,IN,59379,02/17/2004,05/15/2027,65";
-  Student* student = new Student();
-  student->init(studentString);
-  student->printStudent();
-  std::cout << std::endl;
-//  std::cout << student->getLastFirst(); 
-  delete student;
-} // end testStudent
+void printStudents(std::vector<Student*>& students){
+    for (int i = 0; i < (students.size() - 1); i++){
+        students[i]->printStudent();
+        std::cout << std::endl << "______________________________________" << std::endl;
+        }
+}
+
+void showStudentNames(std::vector<Student*>& students){
+     for (int i = 0; i < (students.size() - 1); i++){
+         std::cout <<  students[i]->getLastFirst() << std::endl;
+
+    }
+}
+
+
+void delStudent(std::vector<Student*>& students){
+    for (int i = 0; i < (students.size() - 1); i++){
+        delete students[i];
+    }
+}
+
+void findStudent(std::vector<Student*>& students){
+    
 
